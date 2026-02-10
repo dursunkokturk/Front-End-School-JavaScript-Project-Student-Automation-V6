@@ -141,14 +141,40 @@ const students = [
   }
 ];
 
-for (const student of students){
-  studentInformations.innerHTML += `
-    <tr>
-      <td>${student.firstName}</td>
-      <td>${student.lastName}</td>
-      <td>${student.age}</td>
-      <td>${student.gender}</td>
-      <td>${student.photo}</td>
-    </tr>`;
-  console.log(`Öğrenci Adı : ${student.firstName} Öğrenci Soyadı : ${student.lastName} Öğrenci Yaşı : ${student.age} Öğrenci Cinyeti : ${student.gender} Öğrenci Fotoğrafı : ${student.photo}`);
+function studentsList(){
+  for (const student of students){
+    studentInformations.innerHTML += `
+      <tr>
+        <td>${student.firstName}</td>
+        <td>${student.lastName}</td>
+        <td>${student.age}</td>
+        <td>${student.gender}</td>
+        <td>${student.photo}</td>
+      </tr>`;
+    console.log(`Öğrenci Adı : ${student.firstName} Öğrenci Soyadı : ${student.lastName} Öğrenci Yaşı : ${student.age} Öğrenci Cinyeti : ${student.gender} Öğrenci Fotoğrafı : ${student.photo}`);
+  }
 }
+
+function studentAdd(){
+  let newStudentFirstName = prompt("Eklenecek Öğrencinin Adını Giriniz");
+  let newStudentLastName = prompt("Eklenecek Öğrencinin Soydını Giriniz");
+  let newStudentAge = prompt("Eklenecek Öğrencinin Yaşını Giriniz");
+  let newStudentGender = prompt("Eklenecek Öğrencinin Cinsiyetini Giriniz");
+  let newStudentPhoto = prompt("Eklenecek Öğrencinin Fotoğrafını Giriniz");
+
+  let newStudent = {
+    firstName:newStudentFirstName,
+    lastName:newStudentLastName,
+    age:newStudentAge,
+    gender:newStudentGender,
+    photo:newStudentPhoto,
+  }
+  
+  students.push(newStudent);
+  
+  console.log(`Eklenen Öğrencinin Adı : ${newStudent.firstName} Eklenen Öğrencinin Soyadı : ${newStudent.lastName} Eklenen Öğrencinin Yaşı : ${newStudent.age} Eklenen Öğrencinin Cinsiyeti : ${newStudent.gender} Eklenen Öğrencinin Fotoğrafı : ${newStudent.photo}`);
+}
+
+studentsList();
+studentAdd();
+studentsList();
