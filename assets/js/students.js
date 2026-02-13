@@ -163,6 +163,7 @@ function studentsList(){
         <td>${student.age}</td>
         <td>${student.gender}</td>
         <td>${student.photo}</td>
+        <td><button onclick="studentDelete(this)">Sil</button></td>
       </tr>`;
     console.log(`Öğrenci Adı : ${student.firstName} Öğrenci Soyadı : ${student.lastName} Öğrenci Yaşı : ${student.age} Öğrenci Cinyeti : ${student.gender} Öğrenci Fotoğrafı : ${student.photo}`);
   }
@@ -195,7 +196,27 @@ function studentAdd(){
     <td>${newStudent.age}</td>
     <td>${newStudent.gender}</td>
     <td>${newStudent.photo}</td>
+    <td><button onclick="studentDelete(this)">Sil</button></td>
   </tr>`;
   
   console.log(`Eklenen Öğrencinin Adı : ${newStudent.firstName} Eklenen Öğrencinin Soyadı : ${newStudent.lastName} Eklenen Öğrencinin Yaşı : ${newStudent.age} Eklenen Öğrencinin Cinsiyeti : ${newStudent.gender} Eklenen Öğrencinin Fotoğrafı : ${newStudent.photo}`);
+}
+
+function studentDelete(button){
+  // Kullanicidan Onay Istiyoruz
+  if(confirm("Bu öğrenciyi silmek istediğinizden emin misiniz?")){
+    // Butona Tiklandiginda Tiklanan Satiri Buluyoruz
+    let row = button.parentElement.parentElement;
+    
+    // Tiklanan Satira Karsilik Gelen index'i Degerini Buluyoruz
+    let rowIndex = row.rowIndex - 1;
+    
+    // students Array Icinden Silme Islemini Yapiyoruz
+    students.splice(rowIndex, 1);
+    
+    // HTML'den Satiri Siliyoruz
+    row.remove();
+    
+    alert("Öğrenci Silindi");
+  }
 }
