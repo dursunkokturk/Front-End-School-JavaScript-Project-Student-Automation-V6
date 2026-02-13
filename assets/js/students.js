@@ -141,39 +141,13 @@ const initialStudents = [
   }
 ];
 
-// localStorage'da Ogrenci Data'si Varsa Aliyoruz
-let students = loadStudents();
+// Öğrenci dizisini başlangıç verisiyle oluşturuyoruz
+let students = [...initialStudents];
 
 // Sayfa Acildiginda Students Array Icindeki Ogrencileri listeleliyoruz
 window.onload = function() {
   studentsList();
 };
-
-// localStorage'a Girilen Ogrenci Data'larini HTML Dosyasinda Listeliyoruz
-function loadStudents() {
-
-  /* getItem Methodu Ile 
-    localStorage'da Bulunan Data'yi Aliyoruz*/
-  const storedStudents = localStorage.getItem('students');
-  if (storedStudents) {
-    return JSON.parse(storedStudents);
-  } else {
-
-    /* saveStudents Fonksiyonu Icinde Yapilan Islem Sonucunu Kullanarak
-      Sayfa Ilk Acildiginda Yer Alan Data'lari Kaydediyoruz */
-    saveStudents(initialStudents);
-    return initialStudents;
-  }
-}
-
-/* Kullanicidan Alinan Ogrenci Data'sinin 
-  localStorage'a Eklenmesi Icin JSON Formatina Ceviriyoruz */
-function saveStudents(studentsArray) {
-
-  /* Kullanicidan Alinan Data'yi localStorage'a Kaydederken
-    setItem Methodu Ile key value Yapisini Kullaniyoruz */
-  localStorage.setItem('students', JSON.stringify(studentsArray));
-}
 
 /* Ogrenci Ekleme Butonuna Tiklandiktan Sonra
 Girilen Bilgileri Mevcut Bilgilerle Birlestirip Yazdiriyoruz */
@@ -212,12 +186,7 @@ function studentAdd(){
   
   students.push(newStudent);
 
-  /* Kullancidan Alinan Ogrenci Data'sinin 
-    key value Yapisinda Bulunan Halini
-    localStorage'a Kaydediyoruz */
-  saveStudents(students);
-
-  studentsList();
+  // studentsList();
 
   addstudentInformations.innerHTML += `
   <tr>
