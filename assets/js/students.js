@@ -262,3 +262,24 @@ function studentUpdate(button) {
     }
   }
 }
+
+function studentSearch(){
+
+  /* Ara Butonuna Tiklandiginda
+    input Elementi Icindeki Degere Ulasiyoruz */
+  searchStudent = document.getElementsByTagName("input").value.toLowerCase();
+  console.log(searchStudent[0].value);
+
+  if(userInput[0].value === students.firstName){
+    addstudentInformations.innerHTML += `
+      <tr>
+        <td>${student.firstName}</td>
+        <td>${student.lastName}</td>
+        <td>${student.age}</td>
+        <td>${student.gender}</td>
+        <td>${student.photo}</td>
+        <td><button onclick="studentDelete(this)">Sil</button></td>
+        <td><button onclick="studentUpdate(this)">Düzenle</button></td>
+      </tr>`;
+  }
+}
