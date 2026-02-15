@@ -265,6 +265,9 @@ function studentUpdate(button) {
 
 function studentSearch(){
 
+  let searchArea = querySelector("#studentInformations").value;
+  console.log(searchArea);
+  
   /* Ara Butonuna Tiklandiginda
     input Elementi Icindeki Degere Ulasiyoruz */
   let searchedName = studentName.value.toLowerCase();
@@ -273,7 +276,7 @@ function studentSearch(){
   for(let i=0; i<students.length;i++){
 
     if(searchedName === students[i].firstName.toLowerCase()){
-      searchstudentInformations.innerHTML += `
+      studentInformations.innerHTML += `
         <tr>
           <td>${students[i].firstName}</td>
           <td>${students[i].lastName}</td>
