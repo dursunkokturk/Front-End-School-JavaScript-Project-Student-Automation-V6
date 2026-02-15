@@ -267,19 +267,22 @@ function studentSearch(){
 
   /* Ara Butonuna Tiklandiginda
     input Elementi Icindeki Degere Ulasiyoruz */
-  searchStudent = document.getElementsByTagName("input").value.toLowerCase();
-  console.log(searchStudent[0].value);
+  let searchedName = studentName.value.toLowerCase();
+  console.log(searchedName);
 
-  if(userInput[0].value === students.firstName){
-    addstudentInformations.innerHTML += `
-      <tr>
-        <td>${student.firstName}</td>
-        <td>${student.lastName}</td>
-        <td>${student.age}</td>
-        <td>${student.gender}</td>
-        <td>${student.photo}</td>
-        <td><button onclick="studentDelete(this)">Sil</button></td>
-        <td><button onclick="studentUpdate(this)">Düzenle</button></td>
-      </tr>`;
+  for(let i=0; i<students.length;i++){
+
+    if(searchedName === students[i].firstName.toLowerCase()){
+      addstudentInformations.innerHTML += `
+        <tr>
+          <td>${students[i].firstName}</td>
+          <td>${students[i].lastName}</td>
+          <td>${students[i].age}</td>
+          <td>${students[i].gender}</td>
+          <td>${students[i].photo}</td>
+          <td><button onclick="studentDelete(this)">Sil</button></td>
+          <td><button onclick="studentUpdate(this)">Düzenle</button></td>
+        </tr>`;
+    }
   }
 }
