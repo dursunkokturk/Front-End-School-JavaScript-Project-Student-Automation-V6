@@ -145,15 +145,9 @@ const initialStudents = [
 let students = [...initialStudents];
 
 // Sayfa Acildiginda Students Array Icindeki Ogrencileri listeleliyoruz
-// window.onload = function () {
-//   studentsList();
-// };
-
-function reset(){
-  searchInput = document.querySelector("#searchInput").value = "";
-  console.log(searchInput);
+window.onload = function () {
   studentsList();
-}
+};
 
 /* Ogrenci Ekleme Butonuna Tiklandiktan Sonra
 Girilen Bilgileri Mevcut Bilgilerle Birlestirip Yazdiriyoruz */
@@ -176,6 +170,40 @@ function studentsList() {
   }
 }
 
+// searchForm.addEventListener("submit", function(e) {
+
+//   // Tuşlara Her Basma Isleminde Sayfanın Yenilenmesini Engelliyoruz
+//   e.preventDefault();
+
+//   // Arama Isleminin Yapilacagi Alana Girilen Degerleri Aliyoruz
+//   let searchedValue = searchInput.value.toLowerCase().trim();
+
+//   // Uygulama Ilk Calistirildiginda ve 
+//   // Arama Islemi Sonucunda 
+//   // Arama Islemininin Yapilacagi Alanin Her Zaman Temiz Kalmasini Sagliyoruz
+//   resultArea.innerHTML = "";
+
+//   let found = false;
+
+//   students.forEach(function(student) {
+
+//     // Kullanicidan Alinan Isim students Array Icinde Var Mi Kontrolunu Yapiyoruz
+//     if (student.firstName.toLowerCase().includes(searchedValue)) {
+//       resultArea.innerHTML += `
+//         <p>Adı So<p>
+//         <p>${student.firstName} ${student.lastName} ${student.age} ${student.gender} ${student.photo}</p>
+//       `;
+//       found = true;
+//     }
+
+//   });
+
+//   if (!found) {
+//     resultArea.innerHTML = "<p>Sonuç bulunamadı</p>";
+//   }
+
+// });
+
 searchForm.addEventListener("submit", function (e) {
 
   // Tuşlara Her Basma Isleminde Sayfanın Yenilenmesini Engelliyoruz
@@ -189,7 +217,6 @@ searchForm.addEventListener("submit", function (e) {
   // Arama Islemininin Yapilacagi Alanin Her Zaman Temiz Kalmasini Sagliyoruz
   resultArea.innerHTML = "";
 
-  // Arama Sonucunda Elde Edilen Ogrenci Bilgilerini Tutmak Icin Bos Array Olusturuyoruz 
   let foundStudents = [];
 
   students.forEach(function (student) {
@@ -200,7 +227,6 @@ searchForm.addEventListener("submit", function (e) {
     }
   });
 
-  // Arama Isleminin Sonucunda Data Varsa Dom Uzerinden Listeliyoruz
   if (foundStudents.length > 0) {
     let tableHTML = `
       <table border="1" cellpadding="8">
