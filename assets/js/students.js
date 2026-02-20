@@ -144,63 +144,40 @@ const initialStudents = [
 // Ogrenci Array'ini Baslangic Data'siyla Olusturuyoruz
 let students = [...initialStudents];
 
+// Hoisting Yaparak Uygulamayi Calistiracak Fonksiyonu Cagiriyoruz
+init();
+
 // Sayfa Acildiginda Students Array Icindeki Ogrencileri listeleliyoruz
-studentsList();
+function init() {
+  studentsList(students);
+}
+
+function reset() {
+  searchInput.value = "";
+  studentsList(students);
+}
 
 /* Ogrenci Ekleme Butonuna Tiklandiktan Sonra
 Girilen Bilgileri Mevcut Bilgilerle Birlestirip Yazdiriyoruz */
-function studentsList() {
+function studentsList(list) {
 
-  addstudentInformations.innerHTML = "";
+  let tbody = document.querySelector("#allStudentInformations")
+  tbody.innerHTML = "";
 
-  for (const student of students) {
-    addstudentInformations.innerHTML += `
+  for (let i = 0; i < list.length; i++) {
+    tbody.innerHTML += `
       <tr>
-        <td>${student.firstName}</td>
-        <td>${student.lastName}</td>
-        <td>${student.age}</td>
-        <td>${student.gender}</td>
-        <td>${student.photo}</td>
-        <td><button onclick="studentDelete(this)">Sil</button></td>
-        <td><button onclick="studentUpdate(this)">Düzenle</button></td>
+        <td>${list[i].firstName}</td>
+        <td>${list[i].lastName}</td>
+        <td>${list[i].age}</td>
+        <td>${list[i].gender}</td>
+        <td><img src="${list[i].photo}" alt=""></td>
+        <td><button onclick="studentDelete(${i})">Sil</button></td>
+        <td><button onclick="studentUpdate(${i})">Düzenle</button></td>
       </tr>`;
-    console.log(`Öğrenci Adı : ${student.firstName} Öğrenci Soyadı : ${student.lastName} Öğrenci Yaşı : ${student.age} Öğrenci Cinyeti : ${student.gender} Öğrenci Fotoğrafı : ${student.photo}`);
+    console.log(`Öğrenci Adı : ${list[i].firstName} Öğrenci Soyadı : ${list[i].lastName} Öğrenci Yaşı : ${list[i].age} Öğrenci Cinyeti : ${list[i].gender} Öğrenci Fotoğrafı : ${list[i].photo}`);
   }
 }
-
-// searchForm.addEventListener("submit", function(e) {
-
-//   // Tuşlara Her Basma Isleminde Sayfanın Yenilenmesini Engelliyoruz
-//   e.preventDefault();
-
-//   // Arama Isleminin Yapilacagi Alana Girilen Degerleri Aliyoruz
-//   let searchedValue = searchInput.value.toLowerCase().trim();
-
-//   // Uygulama Ilk Calistirildiginda ve 
-//   // Arama Islemi Sonucunda 
-//   // Arama Islemininin Yapilacagi Alanin Her Zaman Temiz Kalmasini Sagliyoruz
-//   resultArea.innerHTML = "";
-
-//   let found = false;
-
-//   students.forEach(function(student) {
-
-//     // Kullanicidan Alinan Isim students Array Icinde Var Mi Kontrolunu Yapiyoruz
-//     if (student.firstName.toLowerCase().includes(searchedValue)) {
-//       resultArea.innerHTML += `
-//         <p>Adı So<p>
-//         <p>${student.firstName} ${student.lastName} ${student.age} ${student.gender} ${student.photo}</p>
-//       `;
-//       found = true;
-//     }
-
-//   });
-
-//   if (!found) {
-//     resultArea.innerHTML = "<p>Sonuç bulunamadı</p>";
-//   }
-
-// });
 
 searchForm.addEventListener("submit", function (e) {
 
@@ -210,57 +187,17 @@ searchForm.addEventListener("submit", function (e) {
   // Arama Isleminin Yapilacagi Alana Girilen Degerleri Aliyoruz
   let searchedValue = searchInput.value.toLowerCase().trim();
 
-  // Uygulama Ilk Calistirildiginda ve 
-  // Arama Islemi Sonucunda 
-  // Arama Islemininin Yapilacagi Alanin Her Zaman Temiz Kalmasini Sagliyoruz
-  resultArea.innerHTML = "";
+  // Arama Sonuclarinin Tutulacagi Bos Array Olusturuyoruz
+  let filteredStudents = [];
 
-  let foundStudents = [];
+  for (let i = 0; i < students.length; i++) {
 
-  students.forEach(function (student) {
-
-    // Kullanicidan Alinan Isim students Array Icinde Var Mi Kontrolunu Yapiyoruz
-    if (student.firstName.toLowerCase().includes(searchedValue)) {
-      foundStudents.push(student);
+    if (students[i].firstName.toLowerCase().indexOf(searchedValue) !== -1) {
+      filteredStudents.push(students[i]);
     }
-  });
-
-  if (foundStudents.length > 0) {
-    let tableHTML = `
-      <table border="1" cellpadding="8">
-        <thead>
-          <tr>
-            <th>Ad</th>
-            <th>Soyad</th>
-            <th>Yaş</th>
-            <th>Cinsiyet</th>
-            <th>Fotoğraf</th>
-          </tr>
-        </thead>
-        <tbody>
-    `;
-
-    foundStudents.forEach(function (student) {
-      tableHTML += `
-        <tr>
-          <td>${student.firstName}</td>
-          <td>${student.lastName}</td>
-          <td>${student.age}</td>
-          <td>${student.gender}</td>
-          <td><img src="${student.photo}" width="50"></td>
-        </tr>
-      `;
-    });
-
-    tableHTML += `
-        </tbody>
-      </table>
-    `;
-
-    resultArea.innerHTML = tableHTML;
-  } else {
-    resultArea.innerHTML = "<p>Sonuç bulunamadı</p>";
   }
+
+  studentsList(filteredStudents);
 });
 
 /* Ekleme Fonksiyonunu HTML Dosyasinda Bulunan Buton Uzerinden Cagiriyoruz */
@@ -281,50 +218,29 @@ function studentAdd() {
 
   students.push(newStudent);
 
-  // studentsList();
-
-  addstudentInformations.innerHTML += `
-  <tr>
-    <td>${newStudent.firstName}</td>
-    <td>${newStudent.lastName}</td>
-    <td>${newStudent.age}</td>
-    <td>${newStudent.gender}</td>
-    <td>${newStudent.photo}</td>
-    <td><button onclick="studentDelete(this)">Sil</button></td>
-    <td><button onclick="studentUpdate(this)">Düzenle</button></td>
-  </tr>`;
+  studentsList(students);
 
   console.log(`Eklenen Öğrencinin Adı : ${newStudent.firstName} Eklenen Öğrencinin Soyadı : ${newStudent.lastName} Eklenen Öğrencinin Yaşı : ${newStudent.age} Eklenen Öğrencinin Cinsiyeti : ${newStudent.gender} Eklenen Öğrencinin Fotoğrafı : ${newStudent.photo}`);
 }
 
-function studentDelete(button) {
+function studentDelete(index) {
   // Kullanicidan Onay Istiyoruz
   if (confirm("Bu öğrenciyi silmek istediğinizden emin misiniz?")) {
-    // Butona Tiklandiginda Tiklanan Satiri Buluyoruz
-    let row = button.parentElement.parentElement;
-
-    // Tiklanan Satira Karsilik Gelen index'i Degerini Buluyoruz
-    let rowIndex = row.rowIndex - 1;
 
     // students Array Icinden Silme Islemini Yapiyoruz
-    students.splice(rowIndex, 1);
+    students.splice(index, 1);
 
     // HTML'den Satiri Siliyoruz
-    row.remove();
+    // row.remove();
+
+    studentsList(students);
 
     alert("Öğrenci Silindi");
   }
 }
 
-function studentUpdate(button) {
+function studentUpdate(index) {
   if (confirm("Bu Öğrencinin Bilgilerini Düzenlemek İstiyor Musunuz?")) {
-    let row = button.parentElement.parentElement;
-    let rowIndex = row.rowIndex - 1;
-
-    // Update Islemi Icin Tiklanilan Ogrenci Bilgisinin Index Numarasi Uzerinden
-    // Ogrencinin Array Icindeki Data'larina Ulasiyoruz
-    let student = students[rowIndex];
-
     let newFirstName = prompt('Yeni İsmi Giriniz:');
     let newLastName = prompt('Yeni Soyismi Giriniz:');
     let newAge = prompt('Yeni Yaşı Giriniz:');
@@ -335,7 +251,7 @@ function studentUpdate(button) {
     if (newFirstName && newLastName && newAge && newGender && newPhoto) {
 
       // Secilen Ogrencinin Bilgilerini Guncelliyoruz
-      students[rowIndex] = {
+      students[index] = {
         firstName: newFirstName,
         lastName: newLastName,
         age: newAge,
@@ -343,42 +259,8 @@ function studentUpdate(button) {
         photo: newPhoto
       };
 
-      // Student Array Icinde Yapilan Guncelleme Islemini 
-      // HTML'de Gorunur Hale Getiriyoruz
-      row.cells[0].innerText = newFirstName;
-      row.cells[1].innerText = newLastName;
-      row.cells[2].innerText = newAge;
-      row.cells[3].innerText = newGender;
-      row.cells[4].innerText = newPhoto;
-
+      studentsList(students);
       alert("Öğrencinin Bilgileri Güncellendi");
-    }
-  }
-}
-
-function studentSearch() {
-
-  let searchArea = querySelector("#studentInformations").value;
-  console.log(searchArea);
-
-  /* Ara Butonuna Tiklandiginda
-    input Elementi Icindeki Degere Ulasiyoruz */
-  let searchedName = studentName.value.toLowerCase();
-  console.log(searchedName);
-
-  for (let i = 0; i < students.length; i++) {
-
-    if (searchedName === students[i].firstName.toLowerCase()) {
-      studentInformations.innerHTML += `
-        <tr>
-          <td>${students[i].firstName}</td>
-          <td>${students[i].lastName}</td>
-          <td>${students[i].age}</td>
-          <td>${students[i].gender}</td>
-          <td>${students[i].photo}</td>
-          <td><button onclick="studentDelete(this)">Sil</button></td>
-          <td><button onclick="studentUpdate(this)">Düzenle</button></td>
-        </tr>`;
     }
   }
 }
