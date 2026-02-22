@@ -147,8 +147,24 @@ let students = [...initialStudents];
 // Hoisting Yaparak Uygulamayi Calistiracak Fonksiyonu Cagiriyoruz
 init();
 
+// Sayfa Ilk Acildiginda localStorage Bos Ise 
+// initialStudents Verisini Oraya Yaziyoruz. 
+// Sonraki Acilislarda Ise Doğrudan localStorage'dan Okuyoruz. 
+// Bu Sayede Sayfa Yenilenince Veriler Kaybolmuyor.
+// Bu Islemleri init Fonksiyonu Icinde Yapiyoruz
+
 // Sayfa Acildiginda Students Array Icindeki Ogrencileri listeleliyoruz
 function init() {
+  // localStorage'da Data Yoksa 
+  // students Array'in Icindeki Data'lari JSON Objesine Cevirip
+  // localStorage Uzerinden Baslangic Verisi Olarak Yazdiriyoruz
+  if (!localStorage.students) {
+    localStorage.students = JSON.stringify(students);
+  }
+
+  // Her Durumda students'i localStorage'dan Aliyoruz
+  students = JSON.parse(localStorage.students);
+
   studentsList(students);
 }
 
@@ -218,6 +234,16 @@ function studentAdd() {
 
   students.push(newStudent);
 
+  // students Array JavaScript objesi olduğu için 
+  // JSON.stringify() ile string'e Cevirip Kaydediyoruz, 
+  // Okurken de JSON.parse() ile Tekrar Objeye Ceviriyoruz.
+  
+  // Kullanicidan Alinan Data'yi 
+  // JSON Objesine Cevirip localStora'a Ekliyoruz
+  // Ekleme Isleminden Sonra students Array'in Guncel Halini
+  // localStorage'dan Aliyoruz
+  localStorage.students = JSON.stringify(students);
+
   studentsList(students);
 
   console.log(`Eklenen Öğrencinin Adı : ${newStudent.firstName} Eklenen Öğrencinin Soyadı : ${newStudent.lastName} Eklenen Öğrencinin Yaşı : ${newStudent.age} Eklenen Öğrencinin Cinsiyeti : ${newStudent.gender} Eklenen Öğrencinin Fotoğrafı : ${newStudent.photo}`);
@@ -229,6 +255,10 @@ function studentDelete(index) {
 
     // students Array Icinden Silme Islemini Yapiyoruz
     students.splice(index, 1);
+
+    // Silme Isleminden Sonra students Array'in Guncel Halini
+    // localStorage'dan Aliyoruz
+    localStorage.students = JSON.stringify(students);
 
     // HTML'den Satiri Siliyoruz
     // row.remove();
@@ -258,6 +288,10 @@ function studentUpdate(index) {
         gender: newGender,
         photo: newPhoto
       };
+
+      // Guncelleme Isleminden Sonra students Array'in Guncel Halini
+      // localStorage'dan Aliyoruz
+      localStorage.students = JSON.stringify(students);
 
       studentsList(students);
       alert("Öğrencinin Bilgileri Güncellendi");
