@@ -197,8 +197,8 @@ function studentsList(list) {
           Cinsiyet : ${list[i].gender}
         </div>
         <div class="student-buttons">
-          <td><button onclick="studentDelete(${i})">Sil</button></td>
-          <td><button onclick="studentUpdate(${i})">Düzenle</button></td>
+          <td><button onclick="studentDelete(${i})"><h3 class="delete-button">Sil</h3></button></td>
+          <td><button onclick="studentUpdate(${i})"><h3 class="update-button">Düzenle</h3></button></td>
         </div>
       </div>`;
     console.log(`Öğrenci Adı : ${list[i].firstName} Öğrenci Soyadı : ${list[i].lastName} Öğrenci Yaşı : ${list[i].age} Öğrenci Cinyeti : ${list[i].gender} Öğrenci Fotoğrafı : ${list[i].photo}`);

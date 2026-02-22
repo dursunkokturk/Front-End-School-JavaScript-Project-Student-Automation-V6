@@ -20,7 +20,8 @@ body {
 .studentListReset {
   margin-top: 20px;
   display: block;
-  margin: 20px auto 0 auto; /* Ortalar */
+  margin: 20px auto 0 auto;
+  /* Ortalar */
   width: 90%;
   max-width: 300px;
 }
@@ -99,6 +100,20 @@ h2 {
   width: 310px;
 }
 
+.delete-button,
+.update-button {
+  padding: 10px 20px;
+}
+
+.delete-button {
+  color: white;
+  background-color: red;
+}
+
+.update-button {
+  background-color: lightblue;
+}
+
 #allStudentInformations {
   display: flex;
   flex-wrap: wrap;
@@ -122,5 +137,11 @@ h2 {
 @media (width > 1024px) {
   .student-card {
     flex: 1 1 calc(33.333% - 20px);
+  }
+
+  .student-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
