@@ -11,8 +11,6 @@
 
   <!---------------- Ogrenci Ekleme ------------------>
   <button onclick="studentAdd()">Öğrenci Ekle</button>
-  <br>
-  <br>
   
   <!---------------- Listeyi Gosterme ------------------>
   <button onclick="reset()">Sıfırla</button>
@@ -25,20 +23,8 @@
   </form>
 
   <!---------------- Ogrenci Listeme ------------------>
-  <table border="1">
-    <h2>Tüm Öğrenciler</h2>
-    <thead>
-      <tr>
-        <th class="title">Adı</th>
-        <th class="title">Soyadı</th>
-        <th class="title">Yaşı</th>
-        <th class="title">Cinsiyeti</th>
-        <th class="title">Fotoğrafı</th>
-        <th class="title">Yapılacak İşlemler</th>
-      </tr>
-    </thead>
-    <tbody id="allStudentInformations"></tbody>
-  </table>
-  
+  <h2>Tüm Öğrenciler</h2>
+  <div id="allStudentInformations" class="student-container"></div>
+
 </body>
 </html>
