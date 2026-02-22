@@ -10,17 +10,19 @@
 <body>
 
   <!---------------- Ogrenci Ekleme ------------------>
-  <button onclick="studentAdd()">Öğrenci Ekle</button>
+  <button onclick="studentAdd()" class="studentAdd-button">Öğrenci Ekle</button>
   
   <!---------------- Listeyi Gosterme ------------------>
-  <button onclick="reset()">Sıfırla</button>
+  <button onclick="reset()" class="studentListReset">Sıfırla</button>
 
   <!---------------- Arama Islemi ------------------>
-  <h2>Arama İşlem Sonucu</h2>
-  <form id="searchForm">
-    <input type="text" id="searchInput" placeholder="İsim Giriniz">
-    <button type="submit">Ara</button>
-  </form>
+  <div class="search">
+    <h2>Arama Yap</h2>
+    <form id="searchForm">
+      <input type="text" id="searchInput" placeholder="İsim Giriniz">
+      <button type="submit" class="studentSearch-button">Ara</button>
+    </form>
+  </div>
 
   <!---------------- Ogrenci Listeme ------------------>
   <h2>Tüm Öğrenciler</h2>

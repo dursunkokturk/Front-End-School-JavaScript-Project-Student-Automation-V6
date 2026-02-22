@@ -189,20 +189,18 @@ function studentsList(list) {
 
   for (let i = 0; i < list.length; i++) {
     container.innerHTML += `
-    
-        <div class="student-card">
-          <img src="${list[i].photo}" alt="">
-          <div class="student-info">
-            <strong>${list[i].firstName} ${list[i].lastName}</strong><br>
-            Yaş : ${list[i].age} <br>
-            Cinsiyet : ${list[i].gender}
-          </div>
-          <div class="student-buttons">
-            <td><button onclick="studentDelete(${i})">Sil</button></td>
-            <td><button onclick="studentUpdate(${i})">Düzenle</button></td>
-          </div>
+      <div class="student-card">
+        <img src="${list[i].photo}" alt="">
+        <div class="student-info">
+          <strong>${list[i].firstName} ${list[i].lastName}</strong><br>
+          Yaş : ${list[i].age} <br>
+          Cinsiyet : ${list[i].gender}
         </div>
-      `;
+        <div class="student-buttons">
+          <td><button onclick="studentDelete(${i})">Sil</button></td>
+          <td><button onclick="studentUpdate(${i})">Düzenle</button></td>
+        </div>
+      </div>`;
     console.log(`Öğrenci Adı : ${list[i].firstName} Öğrenci Soyadı : ${list[i].lastName} Öğrenci Yaşı : ${list[i].age} Öğrenci Cinyeti : ${list[i].gender} Öğrenci Fotoğrafı : ${list[i].photo}`);
   }
 }
