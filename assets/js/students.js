@@ -141,21 +141,23 @@ const initialStudents = [
   }
 ];
 
+/* ------------------- Uygulamayi Baslatma ------------------- */
+
 // Ogrenci Array'ini Baslangic Data'siyla Olusturuyoruz
 let students = [...initialStudents];
 
 // Hoisting Yaparak Uygulamayi Calistiracak Fonksiyonu Cagiriyoruz
 init();
 
-// Sayfa Ilk Acildiginda localStorage Bos Ise 
-// initialStudents Verisini Oraya Yaziyoruz. 
-// Sonraki Acilislarda Ise Doğrudan localStorage'dan Okuyoruz. 
+// Sayfa Ilk Acildiginda localStorage Bos Ise
+// initialStudents Verisini Oraya Yaziyoruz.
+// Sonraki Acilislarda Ise Doğrudan localStorage'dan Okuyoruz.
 // Bu Sayede Sayfa Yenilenince Veriler Kaybolmuyor.
 // Bu Islemleri init Fonksiyonu Icinde Yapiyoruz
 
 // Sayfa Acildiginda Students Array Icindeki Ogrencileri listeleliyoruz
 function init() {
-  // localStorage'da Data Yoksa 
+  // localStorage'da Data Yoksa
   // students Array'in Icindeki Data'lari JSON Objesine Cevirip
   // localStorage Uzerinden Baslangic Verisi Olarak Yazdiriyoruz
   if (!localStorage.students) {
@@ -168,10 +170,15 @@ function init() {
   studentsList(students);
 }
 
+/* ------------------- Listeyi Sifirlama ------------------- */
+
 function reset() {
   searchInput.value = "";
   studentsList(students);
 }
+
+
+/* ------------------- localStorage'in Guncel Halini Listeleme ------------------- */
 
 /* Ogrenci Ekleme Butonuna Tiklandiktan Sonra
 Girilen Bilgileri Mevcut Bilgilerle Birlestirip Yazdiriyoruz */
@@ -195,6 +202,8 @@ function studentsList(list) {
   }
 }
 
+/* ------------------- Kullanicidan Alinin Data'yi Arama ------------------- */
+
 searchForm.addEventListener("submit", function (e) {
 
   // Tuşlara Her Basma Isleminde Sayfanın Yenilenmesini Engelliyoruz
@@ -216,6 +225,8 @@ searchForm.addEventListener("submit", function (e) {
   studentsList(filteredStudents);
 });
 
+/* ------------------- localStorage ve students Array'e Data Ekleme ve Listeleme ------------------- */
+
 /* Ekleme Fonksiyonunu HTML Dosyasinda Bulunan Buton Uzerinden Cagiriyoruz */
 function studentAdd() {
   let newStudentFirstName = prompt("Eklenecek Öğrencinin Adını Giriniz");
@@ -234,11 +245,11 @@ function studentAdd() {
 
   students.push(newStudent);
 
-  // students Array JavaScript objesi olduğu için 
-  // JSON.stringify() ile string'e Cevirip Kaydediyoruz, 
+  // students Array JavaScript objesi olduğu için
+  // JSON.stringify() ile string'e Cevirip Kaydediyoruz,
   // Okurken de JSON.parse() ile Tekrar Objeye Ceviriyoruz.
-  
-  // Kullanicidan Alinan Data'yi 
+
+  // Kullanicidan Alinan Data'yi
   // JSON Objesine Cevirip localStora'a Ekliyoruz
   // Ekleme Isleminden Sonra students Array'in Guncel Halini
   // localStorage'dan Aliyoruz
@@ -248,6 +259,8 @@ function studentAdd() {
 
   console.log(`Eklenen Öğrencinin Adı : ${newStudent.firstName} Eklenen Öğrencinin Soyadı : ${newStudent.lastName} Eklenen Öğrencinin Yaşı : ${newStudent.age} Eklenen Öğrencinin Cinsiyeti : ${newStudent.gender} Eklenen Öğrencinin Fotoğrafı : ${newStudent.photo}`);
 }
+
+/* ------------------- localStorage ve students Array'den Data Silme ve Listeleme ------------------- */
 
 function studentDelete(index) {
   // Kullanicidan Onay Istiyoruz
@@ -268,6 +281,8 @@ function studentDelete(index) {
     alert("Öğrenci Silindi");
   }
 }
+
+/* ------------------- localStorage ve students Array'de Data Guncelleme ve Listeleme ------------------- */
 
 function studentUpdate(index) {
   if (confirm("Bu Öğrencinin Bilgilerini Düzenlemek İstiyor Musunuz?")) {
